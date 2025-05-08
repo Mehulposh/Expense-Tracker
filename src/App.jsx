@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import Header from "./components/Header/Header";
 import Balance from "./components/Wallet/WalletBallance";
 import Expenses from "./components/Expenses/Expenses";
@@ -10,12 +10,23 @@ function App() {
   const [balacnceModalOpen, setBalanceModalOpen] = useState(false);
   const [expenseModalOpen, setExpenseModalOpen] = useState(false);
   
-  const [expenses, setExpenses] = useState([]);
+  const [expenses, setExpenses] = useState(() => {
+    // Load expenses from localStorage on initial render
+    const savedExpenses = localStorage.getItem('expenses');
+    return savedExpenses ? JSON.parse(savedExpenses) : [];
+  });
 
+  useEffect(() => {
+    localStorage.setItem('expenses', JSON.stringify(expenses));
+  }, [expenses]);
+
+  
   const handleAddBalance = () => {
     setWalletBalance((prev) => prev + parseInt(expenses.amount));
     setBalanceModalOpen(false);
   };
+
+
   const handleAddExpenses = (expenses) => {
     const expenseAmount = parseFloat(expenses.amount || 0);
     if (expenseAmount > walletBalance) {
@@ -23,7 +34,7 @@ function App() {
       return;
     }
     setWalletBalance((prev) => prev - expenseAmount);
-    setExpenses({ title: "", amount: "", category: "", date: "" });
+    setExpenses((prevExpense) =>[...prevExpense,...expenses]);
     setExpenseModalOpen(false);
   };
 
