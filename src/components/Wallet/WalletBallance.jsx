@@ -1,8 +1,13 @@
 import React from "react";
 
 function WalletBalance({ balance,openModal }) {
+
+  const formattedBalance = typeof balance === 'number' 
+    ? balance.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
+    : "$0.00";
+
    return ( <div>
-      <h2>Wallet Balance: ${balance}</h2>
+      <h2>Wallet Balance: {formattedBalance}</h2>
       <button
         type="button"
         onClick={openModal}

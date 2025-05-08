@@ -7,38 +7,67 @@ import BallanceModal from "./components/BallanceModal/BallanceModal";
 
 function App() {
   const [walletBalance, setWalletBalance] = useState(5000);
-  const [balacnceModalOpen, setBalanceModalOpen] = useState(false);
+  const [balanceModalOpen, setBalanceModalOpen] = useState(false);
   const [expenseModalOpen, setExpenseModalOpen] = useState(false);
+  const [currentExpense, setCurrentExpense] = useState(null);
+  const [expenses, setExpenses] = useState([]);
+  const [amountToAdd, setAmountToAdd] = useState('');
   
-  const [expenses, setExpenses] = useState(() => {
-    // Load expenses from localStorage on initial render
+  useEffect(() => {
+    // Load from localStorage if available
     const savedExpenses = localStorage.getItem('expenses');
-    return savedExpenses ? JSON.parse(savedExpenses) : [];
-  });
+    if (savedExpenses) {
+      try {
+        const parsedExpenses = JSON.parse(savedExpenses);
+        // Validate that it's actually an array before setting state
+        if (Array.isArray(parsedExpenses)) {
+          setExpenses(parsedExpenses);
+        } else {
+          console.error('Saved expenses is not an array, initializing empty array');
+          setExpenses([]);
+        }
+      } catch (error) {
+        console.error('Error parsing saved expenses:', error);
+        setExpenses([]);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('expenses', JSON.stringify(expenses));
   }, [expenses]);
 
-  
-  const handleAddBalance = () => {
-    setWalletBalance((prev) => prev + parseInt(expenses.amount));
+  const handleAddBalance = (amount) => {
+    const numericAmount = Number(amount);
+  // Only add if it's a valid number
+  if (!isNaN(numericAmount)) {
+    setWalletBalance((prev) => Number(prev) + numericAmount);
+  }
     setBalanceModalOpen(false);
   };
 
 
-  const handleAddExpenses = (expenses) => {
-    const expenseAmount = parseFloat(expenses.amount || 0);
-    if (expenseAmount > walletBalance) {
-      alert("Insufficient wallet balance!");
-      return;
+  const handleAddExpense = (expense) => {
+    if (currentExpense) {
+      // Update existing expense
+      setExpenses(expenses.map(e => 
+        e.id === expense.id ? expense : e
+      ));
+    } else {
+      // Add new expense
+      setExpenses([...expenses, expense]);
     }
-    setWalletBalance((prev) => prev - expenseAmount);
-    setExpenses((prevExpense) =>[...prevExpense,...expenses]);
+    
+    // Close modal and reset current expense
     setExpenseModalOpen(false);
+    setCurrentExpense(null);
   };
 
-  const totalExpenses = expenses.reduce((total, expense) => total + parseFloat(expense.amount), 0);
+  
+
+  const totalAmount = Array.isArray(expenses) 
+    ? expenses.reduce((total, expense) => total + Number(expense.amount), 0) 
+    : 0;
 
   return (
     <div>
@@ -47,27 +76,31 @@ function App() {
         balance={walletBalance}
         openModal={() => setBalanceModalOpen(true)}
       />
-      {balacnceModalOpen && (
+      {balanceModalOpen && (
         <BallanceModal
+          isOpen={balanceModalOpen}
+          onClose={() => setBalanceModalOpen(false)}
           
-          onRequestClose={() => setBalanceModalOpen(false)}
-          balance={walletBalance}
-          setBalance={setWalletBalance}
+          amountToAdd={amountToAdd}
+          setAmountToAdd={setAmountToAdd}
           handleAddBalance={handleAddBalance}
         />
       )}
 
       <Expenses 
         onAddExpense={() => setExpenseModalOpen(true)}
-        totalExpenses={totalExpenses}
+        totalExpenses={totalAmount}
       />
        {expenseModalOpen && (
         <ExpensesModal
-          
+          isOpen={expenseModalOpen}
+          onClose={() => {
+            setExpenseModalOpen(false);
+            setCurrentExpense(null);
+            }}
           onRequestClose={() => setExpenseModalOpen(false)}
-          expense={expenses}
-          setExpenses={setExpenses}
-          handleAddExpenses={handleAddExpenses}
+          onAddExpense={handleAddExpense}
+        expenseToEdit={currentExpense}
         />
       )}
     </div>
