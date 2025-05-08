@@ -10,17 +10,13 @@ function App() {
   const [balacnceModalOpen, setBalanceModalOpen] = useState(false);
   const [expenseModalOpen, setExpenseModalOpen] = useState(false);
   
-  const [expenses, setExpenses] = useState({
-    title: "",
-    amount: "",
-    date: "",
-  });
+  const [expenses, setExpenses] = useState([]);
 
   const handleAddBalance = () => {
     setWalletBalance((prev) => prev + parseInt(expenses.amount));
     setBalanceModalOpen(false);
   };
-  const handleAddExpenses = () => {
+  const handleAddExpenses = (expenses) => {
     const expenseAmount = parseFloat(expenses.amount || 0);
     if (expenseAmount > walletBalance) {
       alert("Insufficient wallet balance!");

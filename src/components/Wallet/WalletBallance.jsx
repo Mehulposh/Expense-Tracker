@@ -2,7 +2,7 @@ import React from "react";
 
 function WalletBalance({ balance,openModal }) {
    return ( <div>
-      <h2>Wallet Balance: ${balance.toFixed(2)}</h2>
+      <h2>Wallet Balance: ${balance}</h2>
       <button
         type="button"
         onClick={openModal}

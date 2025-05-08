@@ -2,7 +2,7 @@ import React from "react";
 
 function Expenses({ onAddExpense, totalExpenses }) {
    return ( <div>
-      <h2>Expenses: ${totalExpenses.toFixed(2)}</h2>
+      <h2>Expenses: ${totalExpenses}</h2>
       <button
         type="button"
         onClick={onAddExpense}
