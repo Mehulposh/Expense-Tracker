@@ -9,19 +9,19 @@ function App() {
   const [walletBalance, setWalletBalance] = useState(5000);
   const [balacnceModalOpen, setBalanceModalOpen] = useState(false);
   const [expenseModalOpen, setExpenseModalOpen] = useState(false);
-
-  const [expense, setExpenses] = useState({
+  
+  const [expenses, setExpenses] = useState({
     title: "",
     amount: "",
     date: "",
   });
 
   const handleAddBalance = () => {
-    setWalletBalance((prev) => prev + parseInt(expense.amount));
+    setWalletBalance((prev) => prev + parseInt(expenses.amount));
     setBalanceModalOpen(false);
   };
   const handleAddExpenses = () => {
-    const expenseAmount = parseFloat(expense.amount || 0);
+    const expenseAmount = parseFloat(expenses.amount || 0);
     if (expenseAmount > walletBalance) {
       alert("Insufficient wallet balance!");
       return;
@@ -31,13 +31,38 @@ function App() {
     setExpenseModalOpen(false);
   };
 
+  const totalExpenses = expenses.reduce((total, expense) => total + parseFloat(expense.amount), 0);
+
   return (
     <div>
       <Header/>
       <Balance
         balance={walletBalance}
-        onAddIncome={handleAddBalance}
+        openModal={() => setBalanceModalOpen(true)}
       />
+      {balacnceModalOpen && (
+        <BallanceModal
+          
+          onRequestClose={() => setBalanceModalOpen(false)}
+          balance={walletBalance}
+          setBalance={setWalletBalance}
+          handleAddBalance={handleAddBalance}
+        />
+      )}
+
+      <Expenses 
+        onAddExpense={() => setExpenseModalOpen(true)}
+        totalExpenses={totalExpenses}
+      />
+       {expenseModalOpen && (
+        <ExpensesModal
+          
+          onRequestClose={() => setExpenseModalOpen(false)}
+          expense={expenses}
+          setExpenses={setExpenses}
+          handleAddExpenses={handleAddExpenses}
+        />
+      )}
     </div>
   )
 

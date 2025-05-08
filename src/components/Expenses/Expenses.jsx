@@ -1,8 +1,8 @@
 import React from "react";
 
-function Expenses({ onAddExpense  }) {
+function Expenses({ onAddExpense, totalExpenses }) {
    return ( <div>
-      {/* <h2>Wallet Balance: ${balance.toFixed(2)}</h2> */}
+      <h2>Expenses: ${totalExpenses.toFixed(2)}</h2>
       <button
         type="button"
         onClick={onAddExpense}

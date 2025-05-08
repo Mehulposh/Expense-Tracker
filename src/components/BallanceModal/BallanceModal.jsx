@@ -1,10 +1,10 @@
 import React from "react";
 import Modal from "react-modal";
 
-function BallanceModal({ isOpen, onRequestClose, balance, setBalance, handleAddBalance }) {
+function BallanceModal({onRequestClose, balance, setBalance, handleAddBalance }) {
     return(
         <Modal 
-            isOpen={isOpen}
+            isOpen
             onRequestClose={onRequestClose}
             contentLabel="Add Balance"
         >

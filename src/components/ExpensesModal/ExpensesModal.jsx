@@ -3,10 +3,10 @@ import Modal from "react-modal";
 
 const categories = ["Food", "Travel", "Shopping", "Other"];
 
-function ExpensesModal({ isOpen, onRequestClose,expense, setExpenses, handleAddExpenses }) {
+function ExpensesModal({ onRequestClose,expense, setExpenses, handleAddExpenses }) {
     return(
         <Modal 
-            isOpen={isOpen}
+            isOpen
             onRequestClose={onRequestClose}
             contentLabel="Add Expenses"
         >
