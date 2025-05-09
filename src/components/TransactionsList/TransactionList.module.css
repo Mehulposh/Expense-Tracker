@@ -9,6 +9,6 @@
 
 @media (max-width: 768px){
     .transactionList{
-        width: 100%;
+        width: 100vw;
     }
 }
