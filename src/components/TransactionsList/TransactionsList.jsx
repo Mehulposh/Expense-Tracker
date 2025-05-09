@@ -9,7 +9,7 @@ function TransactionList({expenses}){
         <h2>Recent Transactions</h2>
         <div className={styles.transactionList}>
 
-            {expenses? (expenses.map((transaction) => (
+            {expenses.length>0? (expenses.map((transaction) => (
                     <>
                     <Transaction key={transaction.id} data={transaction} />
                     <hr/>

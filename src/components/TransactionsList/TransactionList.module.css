@@ -3,4 +3,6 @@
     width: 60vw;
     padding: 10px;
     gap: 10px;
+    color: black;
+    border-radius: 10px;
 }
