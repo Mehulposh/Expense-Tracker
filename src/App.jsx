@@ -8,13 +8,20 @@ import PieChart  from "./components/PieChart/PieChart";
 import './App.css';
 
 function App() {
-  const [walletBalance, setWalletBalance] = useState(5000);
+  const [walletBalance, setWalletBalance] = useState(() => {
+    const storedBalance = localStorage.getItem("walletBalance");
+    return storedBalance == 5000 ? parseFloat(storedBalance) : 5000;
+  });
   const [balanceModalOpen, setBalanceModalOpen] = useState(false);
   const [expenseModalOpen, setExpenseModalOpen] = useState(false);
   const [currentExpense, setCurrentExpense] = useState(null);
   const [expenses, setExpenses] = useState([]);
   const [amountToAdd, setAmountToAdd] = useState('');
   
+  useEffect(() => {
+    localStorage.setItem("walletBalance", walletBalance);
+  }, [walletBalance]);
+
   useEffect(() => {
     // Load from localStorage if available
     const savedExpenses = localStorage.getItem('expenses');
@@ -44,7 +51,7 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem('expenses', JSON.stringify(expenses));
-    localStorage.setItem('walletBalance', JSON.stringify(walletBalance-totalAmount));
+    setWalletBalance(walletBalance-totalAmount);
   }, [expenses]);
 
   const handleAddBalance = (amount) => {

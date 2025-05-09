@@ -1,7 +1,9 @@
 import React,{useState,useEffect} from "react";
 import Modal from "react-modal";
 import styles from './ExpensesModal.module.css';
-const categories = ["Food", "Travel", "Shopping", "Other"];
+
+
+const categories = ["Food", "Travel", "Entertainment"];
 
 function ExpensesModal({ isOpen, onClose, onAddExpense, expenseToEdit  }) {
     
@@ -87,6 +89,7 @@ function ExpensesModal({ isOpen, onClose, onAddExpense, expenseToEdit  }) {
                 required
                 />
             <select name="category" placeholder="Category" value={formData.category || ""} onChange={handleChange} className={styles.categoryInput} required>
+                <option value="" selected>Select Category</option>
                 {categories.map((category) => (
                     <option key={category} value={category}>
                         {category}
