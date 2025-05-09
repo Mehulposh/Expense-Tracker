@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import Header from "./components/Header/Header";
+import Header from "./components/header/Header";
 import Balance from "./components/Wallet/WalletBallance";
 import Expenses from "./components/Expenses/Expenses";
 import ExpensesModal from "./components/ExpensesModal/ExpensesModal";
