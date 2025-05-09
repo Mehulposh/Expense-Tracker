@@ -47,7 +47,7 @@ function CustomPieChart({expenses}) {
       }));
     
       return (
-        <PieChart width={300} height={300} >
+        <PieChart width={300} height={300} style={{border: 'none'}}>
           <Pie
             data={pieChartData}
             dataKey="price"
@@ -56,7 +56,8 @@ function CustomPieChart({expenses}) {
             cy="50%"
             outerRadius={110}
             // fill="#8884d8"
-            label={({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+            stroke="none"
+            label={({ cx, cy, midAngle, innerRadius, outerRadius, percent }) => {
           const RADIAN = Math.PI / 180;
           const radius = 25 + innerRadius + (outerRadius - innerRadius);
           const x = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -65,7 +66,7 @@ function CustomPieChart({expenses}) {
             <CustomLabel
               x={x}
               y={y}
-              value={`${pieChartData[index].category}: ${(percent * 100).toFixed(1)}%`}
+              value={`${(percent * 100)}%`}
             />
           );
         }}

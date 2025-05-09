@@ -1,5 +1,6 @@
 import React from "react";
 import Modal from "react-modal";
+import styles from "./BalanceModal.module.css";
 
 function BallanceModal({isOpen,onClose,amount,setAmountToAdd, handleAddBalance }) {
     return(
@@ -7,20 +8,24 @@ function BallanceModal({isOpen,onClose,amount,setAmountToAdd, handleAddBalance }
             isOpen={isOpen}
             onRequestClose={onClose}
             contentLabel="Add Balance"
+            className={styles.WalletModal}
         >
-            <h2>Add Balance</h2>
+            <h2 className={styles.heading}>Add Balance</h2>
+            <div className={styles.balanceForm}>
             <input 
                 type="number" 
-                placeholder="Enter amount" 
+                placeholder="Income Amount" 
                 value={amount} 
                 onChange={(e) => {
                     // Ensure we're setting a number or empty string
                     const value = e.target.value;
                     setAmountToAdd(value === '' ? '' : Number(value));
                 }} 
+                className={styles.input}
             />
-            <button type="button" onClick={handleAddBalance}>Add Balance</button>
-            <button type="button" onClick={onClose}>Close</button>
+            <button type="button" onClick={handleAddBalance} className={styles.addBalance}>Add Balance</button>
+            <button type="button" onClick={onClose} className={styles.Close}>Close</button>
+            </div>
         </Modal>
     )
 }

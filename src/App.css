@@ -25,3 +25,14 @@
   padding: 30px;
   text-align: center;
 }
+
+@media (max-width: 768px) {
+  .App{
+    flex-direction: column;
+    gap: 0px;
+  }
+  .Wallet_Balance , .Expenses{
+   
+    margin-bottom: 20px;
+  }
+}

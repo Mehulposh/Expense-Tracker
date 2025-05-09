@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import Modal from "react-modal";
-
+import styles from './ExpensesModal.module.css';
 const categories = ["Food", "Travel", "Shopping", "Other"];
 
 function ExpensesModal({ isOpen, onClose, onAddExpense, expenseToEdit  }) {
@@ -70,11 +70,12 @@ function ExpensesModal({ isOpen, onClose, onAddExpense, expenseToEdit  }) {
             isOpen={isOpen}
             onRequestClose={onClose}
             contentLabel="Add Expenses"
+            className={styles.expensesModal}
         >
         <form onSubmit={handleSubmit}>
-            <h2>Add Expenses</h2>
+            <h2 className={styles.heading}>Add Expenses</h2>
             <input type="text" name="title" placeholder="Title" value={formData.title}  onChange={handleChange}
-                required
+                required className={styles.titleInput}
             />
             <input 
                 type="number" 
@@ -82,9 +83,10 @@ function ExpensesModal({ isOpen, onClose, onAddExpense, expenseToEdit  }) {
                 placeholder="Price"   
                 value={formData.price}
                 onChange={handleChange}
+                className={styles.priceInput}
                 required
                 />
-            <select name="category" placeholder="Category" value={formData.category || ""} onChange={handleChange} required>
+            <select name="category" placeholder="Category" value={formData.category || ""} onChange={handleChange} className={styles.categoryInput} required>
                 {categories.map((category) => (
                     <option key={category} value={category}>
                         {category}
@@ -97,10 +99,11 @@ function ExpensesModal({ isOpen, onClose, onAddExpense, expenseToEdit  }) {
                 placeholder="Date"  
                 value={formData.date}
                 onChange={handleChange}
+                className={styles.dateInput}
                 required 
                 />
-            <button type="submit">Add Expenses</button>
-            <button type="button" onClick={onClose}>Close</button>
+            <button type="submit" className={styles.addExpenses}>Add Expenses</button>
+            <button type="button" onClick={onClose} className={styles.ExpensesClose}>Close</button>
         </form>
         </Modal>
     )
