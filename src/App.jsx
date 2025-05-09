@@ -5,22 +5,35 @@ import Expenses from "./components/Expenses/Expenses";
 import ExpensesModal from "./components/ExpensesModal/ExpensesModal";
 import BallanceModal from "./components/BallanceModal/BallanceModal";
 import PieChart  from "./components/PieChart/PieChart";
+import TransactionList from "./components/TransactionsList/TransactionsList";
+import { v4 as uuidv4 } from 'uuid';
+
 import './App.css';
 
 function App() {
   const [walletBalance, setWalletBalance] = useState(() => {
     const storedBalance = localStorage.getItem("walletBalance");
-    return storedBalance == 5000 ? parseFloat(storedBalance) : 5000;
+    return storedBalance ? parseFloat(storedBalance) : 5000;
   });
   const [balanceModalOpen, setBalanceModalOpen] = useState(false);
   const [expenseModalOpen, setExpenseModalOpen] = useState(false);
-  const [currentExpense, setCurrentExpense] = useState(null);
+ 
   const [expenses, setExpenses] = useState([]);
   const [amountToAdd, setAmountToAdd] = useState('');
   
   useEffect(() => {
     localStorage.setItem("walletBalance", walletBalance);
   }, [walletBalance]);
+
+  useEffect(() => {
+  window.onbeforeunload = () => {
+    localStorage.removeItem("walletBalance");
+  };
+
+  return () => {
+    window.onbeforeunload = null; // Clean up
+  };
+}, []);
 
   useEffect(() => {
     // Load from localStorage if available
@@ -51,34 +64,34 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem('expenses', JSON.stringify(expenses));
-    setWalletBalance(walletBalance-totalAmount);
+    
   }, [expenses]);
 
   const handleAddBalance = (amount) => {
     const numericAmount = Number(amount);
-  // Only add if it's a valid number
-  if (!isNaN(numericAmount)) {
-    setWalletBalance((prev) => Number(prev) + numericAmount);
-  }
-    setBalanceModalOpen(false);
+  
+    if (!isNaN(numericAmount)) {
+      setWalletBalance((prev) => Number(prev) + numericAmount);
+    }
+      setBalanceModalOpen(false);
   };
 
 
   const handleAddExpense = (expense) => {
-    if (currentExpense) {
-      // Update existing expense
-      setExpenses(expenses.map(e => 
-        e.id === expense.id ? expense : e
-      ));
-    } else {
-      // Add new expense
-      setExpenses([...expenses, expense]);
+    const numericPrice = Number(expense.price);
+
+    if (walletBalance < numericPrice) {
+      alert("Insufficient balance!");
+      return;
     }
+
+      setExpenses([...expenses, { ...expense, id: uuidv4() }]);
+      setWalletBalance((prevBalance) => prevBalance - numericPrice);
     
-    // Close modal and reset current expense
-     setExpenseModalOpen(false);
-    setCurrentExpense(null);
-  };
+    setExpenseModalOpen(false);
+    
+};
+
 
   
 
@@ -115,16 +128,20 @@ function App() {
           isOpen={expenseModalOpen}
           onClose={() => {
             setExpenseModalOpen(false);
-            setCurrentExpense(null);
+            
             }}
           onRequestClose={() => setExpenseModalOpen(false)}
           onAddExpense={handleAddExpense}
-        expenseToEdit={currentExpense}
+       
         />
       )}
       </div>
       <PieChart expenses={expenses}/>
+      
     </div>
+    <div>
+        <TransactionList expenses={expenses} />
+      </div>
     </>
   )
 

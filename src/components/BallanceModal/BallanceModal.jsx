@@ -2,7 +2,7 @@ import React from "react";
 import Modal from "react-modal";
 import styles from "./BalanceModal.module.css";
 
-function BallanceModal({isOpen,onClose,amount,setAmountToAdd, handleAddBalance }) {
+function BallanceModal({isOpen,onClose,amountToAdd,setAmountToAdd, handleAddBalance }) {
     return(
         <Modal 
             isOpen={isOpen}
@@ -15,7 +15,7 @@ function BallanceModal({isOpen,onClose,amount,setAmountToAdd, handleAddBalance }
             <input 
                 type="number" 
                 placeholder="Income Amount" 
-                value={amount} 
+                value={amountToAdd} 
                 onChange={(e) => {
                     // Ensure we're setting a number or empty string
                     const value = e.target.value;

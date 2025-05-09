@@ -47,13 +47,13 @@ function ExpensesModal({ isOpen, onClose, onAddExpense, expenseToEdit  }) {
         
         // Validate data before submission
         if (!formData.title || !formData.price || !formData.date) {
-          // Show validation error
+          // Show validation error 
           return;
         }
         
         // Create expense object with proper data types
         const expense = {
-          id: expenseToEdit ? expenseToEdit.id : Date.now().toString(),
+          
           title: formData.title,
           price: Number(formData.price), // Convert to number
           date: formData.date,

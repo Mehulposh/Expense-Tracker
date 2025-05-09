@@ -1,32 +1,41 @@
 import React from "react";
+import { PiPizza } from "react-icons/pi";
+import { TiDeleteOutline } from "react-icons/ti";
+import { CiEdit } from "react-icons/ci";
+import { GoGift } from "react-icons/go";
+import { PiCar } from "react-icons/pi";
+import styles from './Transaction.module.css'
 
 function Transactions({data}){
 
+     const category = data.category.toLowerCase(); 
+
     const handleImg = () => {
-        if(data.category === "food"){
-            return '../../assets/food.svg';
+        if(category === "food"){
+            return <PiPizza/>;
         }
-        else if(data.category === "transport"){
-            return '../../assets/travel.svg';
+        else if(category === "travel"){
+            return <PiCar/>;
         }
         else{
-            return '../../assets/entertainment.svg';
+            return <GoGift/>;
         }
     }
 
     return(
-        <div>
-            <div>
-                <img src={handleImg} alt={data.category} />
+        <div className={styles.transaction}>
+            <div className={styles.transactionName}>
+                <div className={styles.categoryIcon}>{handleImg()}</div>
+                <div className={styles.transactionDetail}>
+                    <p className={styles.title}>{data.title}</p>
+                    <p className={styles.date}>{data.date}</p>
+                </div>
             </div>
-            <div>
-                <p>{data.title}</p>
-                <p>{data.date}</p>
-            </div>
-            <div>
-                <p>{data.price}</p>
-                <img src='../../assets/delete.svg' alt="delete" />
-                <img src='../../assets/edit.svg' alt="edit" />
+            
+            <div className={styles.options}>
+                <p className={styles.price}>{data.price}</p>
+                <TiDeleteOutline className={styles.deleteIcon}/>
+                <CiEdit className={styles.editIcon} />
             </div>
         </div>
     )

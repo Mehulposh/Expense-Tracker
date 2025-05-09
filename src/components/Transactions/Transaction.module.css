@@ -1,0 +1,70 @@
+.transaction{
+    display: flex;
+    color: black;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+   
+}
+
+.categoryIcon{
+    background-color: rgba(217, 217, 217, 1);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+}
+
+.transactionName{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.title{
+    margin: 0;
+    color: rgba(0, 0, 0, 1);
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.date{
+    margin: 0;
+    color: rgba(155, 155, 155, 1);
+}
+.options{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.price{
+    color: rgba(244, 187, 74, 1);
+}
+.deleteIcon{
+    border-radius: 50%;
+    color: white;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+    background-color: red;
+    height: 30px;
+    width: 30px;
+    padding: 5px;
+}
+
+.editIcon{
+    border-radius: 50%;
+    color: white;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+    background-color: rgba(244, 187, 74, 1);
+    height: 30px;
+    width: 30px;
+    padding: 5px;
+}

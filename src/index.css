@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap');
 
 
-:root {
+#root {
   color: white;
   font-family: 'ubuntu', sans-serif;
+  height: 100vh;
 
 }
 
