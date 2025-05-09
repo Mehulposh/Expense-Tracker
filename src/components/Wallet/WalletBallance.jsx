@@ -1,5 +1,5 @@
 import React from "react";
-
+import styles from "./Wallet.module.css";
 function WalletBalance({ balance,openModal }) {
 
   const formattedBalance = typeof balance === 'number' 
@@ -7,11 +7,11 @@ function WalletBalance({ balance,openModal }) {
     : "$0.00";
 
    return ( <div>
-      <h2>Wallet Balance: {formattedBalance}</h2>
+      <h2>Wallet Balance: <span className={styles.balance}>{formattedBalance}</span></h2>
       <button
         type="button"
         onClick={openModal}
-        style={{ marginRight: "10px", padding: "10px 20px", cursor: "pointer" }}
+      className={styles.addButton}
       >
         + Add Income
       </button>

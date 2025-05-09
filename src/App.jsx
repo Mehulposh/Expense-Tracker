@@ -4,6 +4,8 @@ import Balance from "./components/Wallet/WalletBallance";
 import Expenses from "./components/Expenses/Expenses";
 import ExpensesModal from "./components/ExpensesModal/ExpensesModal";
 import BallanceModal from "./components/BallanceModal/BallanceModal";
+import PieChart  from "./components/PieChart/PieChart";
+import './App.css';
 
 function App() {
   const [walletBalance, setWalletBalance] = useState(5000);
@@ -22,6 +24,7 @@ function App() {
         // Validate that it's actually an array before setting state
         if (Array.isArray(parsedExpenses)) {
           setExpenses(parsedExpenses);
+          
         } else {
           console.error('Saved expenses is not an array, initializing empty array');
           setExpenses([]);
@@ -33,8 +36,15 @@ function App() {
     }
   }, []);
 
+  console.log(expenses);
+
+  const totalAmount = Array.isArray(expenses) 
+    ? expenses.reduce((total, expense) => total + Number(expense.price), 0) 
+    : 0;
+
   useEffect(() => {
     localStorage.setItem('expenses', JSON.stringify(expenses));
+    localStorage.setItem('walletBalance', JSON.stringify(walletBalance-totalAmount));
   }, [expenses]);
 
   const handleAddBalance = (amount) => {
@@ -59,19 +69,19 @@ function App() {
     }
     
     // Close modal and reset current expense
-    setExpenseModalOpen(false);
+     setExpenseModalOpen(false);
     setCurrentExpense(null);
   };
 
   
 
-  const totalAmount = Array.isArray(expenses) 
-    ? expenses.reduce((total, expense) => total + Number(expense.amount), 0) 
-    : 0;
+  
 
   return (
-    <div>
-      <Header/>
+    <>
+      <Header />
+    <div className="App">
+      <div className="Wallet_Balance">
       <Balance
         balance={walletBalance}
         openModal={() => setBalanceModalOpen(true)}
@@ -86,7 +96,9 @@ function App() {
           handleAddBalance={handleAddBalance}
         />
       )}
+      </div>
 
+      <div className="Expenses">
       <Expenses 
         onAddExpense={() => setExpenseModalOpen(true)}
         totalExpenses={totalAmount}
@@ -103,7 +115,10 @@ function App() {
         expenseToEdit={currentExpense}
         />
       )}
+      </div>
+      <PieChart expenses={expenses}/>
     </div>
+    </>
   )
 
 

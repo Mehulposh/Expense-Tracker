@@ -7,7 +7,7 @@ function ExpensesModal({ isOpen, onClose, onAddExpense, expenseToEdit  }) {
     
     const [formData, setFormData] = useState({
         title: '',
-        amount: '',
+        price: '',
         date: '',
         category: 'other'
       });
@@ -44,7 +44,7 @@ function ExpensesModal({ isOpen, onClose, onAddExpense, expenseToEdit  }) {
         e.preventDefault();
         
         // Validate data before submission
-        if (!formData.title || !formData.amount || !formData.date) {
+        if (!formData.title || !formData.price || !formData.date) {
           // Show validation error
           return;
         }
@@ -53,7 +53,7 @@ function ExpensesModal({ isOpen, onClose, onAddExpense, expenseToEdit  }) {
         const expense = {
           id: expenseToEdit ? expenseToEdit.id : Date.now().toString(),
           title: formData.title,
-          amount: Number(formData.amount), // Convert to number
+          price: Number(formData.price), // Convert to number
           date: formData.date,
           category: formData.category
         };
@@ -78,9 +78,9 @@ function ExpensesModal({ isOpen, onClose, onAddExpense, expenseToEdit  }) {
             />
             <input 
                 type="number" 
-                name="Price" 
+                name="price" 
                 placeholder="Price"   
-                value={formData.amount}
+                value={formData.price}
                 onChange={handleChange}
                 required
                 />

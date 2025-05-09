@@ -1,12 +1,13 @@
 import React from "react";
+import styles from "./Expenses.module.css";
 
 function Expenses({ onAddExpense, totalExpenses }) {
    return ( <div>
-      <h2>Expenses: ${totalExpenses}</h2>
+      <h2>Expenses: <span className={styles.total_expenses}>${totalExpenses}</span></h2>
       <button
         type="button"
         onClick={onAddExpense}
-        style={{ padding: "10px 20px", cursor: "pointer" }}
+        className={styles.addExpenseButton}
       >
         + Add Expense
       </button>

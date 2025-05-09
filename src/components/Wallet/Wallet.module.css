@@ -1,0 +1,15 @@
+.balance{
+    color: greenyellow;
+}
+
+.addButton{
+    background: linear-gradient(to right ,greenyellow, lightgreen);
+    color: white;
+    height: 40px;
+    width: 200px;
+    font-size: medium;
+    font-weight: bold;
+    border: none;
+    border-radius: 15px;
+    padding: 5px;
+}

@@ -1,0 +1,15 @@
+.total_expenses{
+    color: orange;
+}
+
+.addExpenseButton{
+    background: linear-gradient(to right ,rgb(244, 144, 144), red);
+    color: white;
+    height: 40px;
+    width: 200px;
+    font-size: medium;
+    font-weight: bold;
+    border: none;
+    border-radius: 15px;
+    padding: 5px;
+}
