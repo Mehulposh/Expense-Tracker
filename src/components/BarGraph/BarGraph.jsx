@@ -31,10 +31,14 @@ const RoundedBar = (props) => {
 
 function CustomBarChart({ data}) {
 
-     const chartData = categories.map((category) => ({
-    category,
-    price: data.find((item) => item.category === category)?.price || 0,
-  }));
+     const chartData = categories.map((category) => {
+    const totalPrice = data
+      .filter((item) => item.category === category)
+      .reduce((sum, item) => sum + Number(item.price), 0);
+    return { category, price: totalPrice };
+  });
+
+  
   return (
     <div>
         <h2>Top Expenses</h2>

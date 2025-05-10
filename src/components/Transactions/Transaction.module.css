@@ -52,7 +52,7 @@
     color: rgba(244, 187, 74, 1);
     display: flex;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
     
 }
 .deleteIcon{

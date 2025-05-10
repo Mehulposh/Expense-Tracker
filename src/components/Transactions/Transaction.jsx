@@ -34,7 +34,9 @@ function Transactions({data}){
             </div>
             
             <div className={styles.options}>
-                <p className={styles.price}><MdCurrencyRupee/>{data.price}</p>
+                <div>
+                    <p className={styles.price}><MdCurrencyRupee/>{data.price}</p>
+                </div>
                 <div className={styles.options_1}>
                 <TiDeleteOutline className={styles.deleteIcon}/>
                 <CiEdit className={styles.editIcon} />
