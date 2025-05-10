@@ -13,7 +13,12 @@ import './App.css';
 function App() {
   const [walletBalance, setWalletBalance] = useState(() => {
     const storedBalance = localStorage.getItem("walletBalance");
-    return storedBalance ? parseFloat(storedBalance) : 5000;
+    const savedExpenses = localStorage.getItem('expenses');
+
+    const totalExpenses = savedExpenses
+      ? JSON.parse(savedExpenses).reduce((total, expense) => total + Number(expense.price), 0)
+      : 0;
+    return storedBalance ? parseFloat(storedBalance) : 5000 - totalExpenses;
   });
   const [balanceModalOpen, setBalanceModalOpen] = useState(false);
   const [expenseModalOpen, setExpenseModalOpen] = useState(false);

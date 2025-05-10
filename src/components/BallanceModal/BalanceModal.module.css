@@ -51,3 +51,10 @@
     color: white;
     background-color: #F4BB4A;
 }
+
+@media (max-width: 768px){
+    .WalletModal{
+        top: 35%;
+        left: 10%;
+    }
+}

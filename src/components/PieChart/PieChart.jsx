@@ -66,7 +66,7 @@ function CustomPieChart({expenses}) {
             <CustomLabel
               x={x}
               y={y}
-              value={`${(percent * 100)}%`}
+              value={`${(percent * 100).toFixed(0)}%`}
             />
           );
         }}

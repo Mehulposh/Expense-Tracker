@@ -34,8 +34,10 @@ function Transactions({data}){
             
             <div className={styles.options}>
                 <p className={styles.price}>{data.price}</p>
+                <div>
                 <TiDeleteOutline className={styles.deleteIcon}/>
                 <CiEdit className={styles.editIcon} />
+                </div>
             </div>
         </div>
     )

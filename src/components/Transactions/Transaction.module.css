@@ -68,3 +68,18 @@
     width: 30px;
     padding: 5px;
 }
+
+@media (max-width: 768px){
+    .transaction{
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        border: 1px solid black ;
+        align-items: flex-start;
+    }
+
+    .options{
+        justify-content: space-evenly;
+        gap: 10px;
+    }
+}
