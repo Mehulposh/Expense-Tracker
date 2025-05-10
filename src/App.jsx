@@ -5,6 +5,7 @@ import Expenses from "./components/Expenses/Expenses";
 import ExpensesModal from "./components/ExpensesModal/ExpensesModal";
 import BallanceModal from "./components/BallanceModal/BallanceModal";
 import PieChart  from "./components/PieChart/PieChart";
+import BarGraph from "./components/BarGraph/BarGraph"
 import TransactionList from "./components/TransactionsList/TransactionsList";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -147,6 +148,7 @@ function App() {
       </div>
       <div className="App-bottom">
         <TransactionList expenses={expenses} />
+        <BarGraph data={expenses}/>
       </div>
     </div>
     

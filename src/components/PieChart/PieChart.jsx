@@ -1,5 +1,6 @@
 import React from "react";
 import { Legend } from "recharts";
+import styles from "./PieChart.module.css"
 
 import { PieChart, Pie, Tooltip, Cell } from "recharts";
 
@@ -47,7 +48,7 @@ function CustomPieChart({expenses}) {
       }));
     
       return (
-        <PieChart width={300} height={300} style={{border: 'none'}}>
+        <PieChart width={300} height={300} className={styles.legend}>
           <Pie
             data={pieChartData}
             dataKey="price"
@@ -77,7 +78,7 @@ function CustomPieChart({expenses}) {
             ))}
           </Pie>
           <Tooltip />
-          <Legend />
+          <Legend  />
         </PieChart>
       );
     

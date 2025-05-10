@@ -5,7 +5,7 @@ import styles from './TransactionList.module.css';
 
 function TransactionList({expenses}){
     return (
-        <>
+        <div>
         <h2>Recent Transactions</h2>
         <div className={styles.transactionList}>
 
@@ -17,7 +17,7 @@ function TransactionList({expenses}){
                 ))) : (<p>No transactions!</p>)}
      
         </div>
-        </>
+        </div>
     )
 }
 
