@@ -103,51 +103,54 @@ function App() {
   
 
   return (
-    <>
-      <Header />
+    
+      
     <div className="App">
+      <Header />
+      <div className='App-top'>
       <div className="Wallet_Balance">
-      <Balance
-        balance={walletBalance}
-        openModal={() => setBalanceModalOpen(true)}
-      />
-      {balanceModalOpen && (
-        <BallanceModal
-          isOpen={balanceModalOpen}
-          onClose={() => setBalanceModalOpen(false)}
-          
-          amountToAdd={amountToAdd}
-          setAmountToAdd={setAmountToAdd}
-          handleAddBalance={handleAddBalance}
+        <Balance
+          balance={walletBalance}
+          openModal={() => setBalanceModalOpen(true)}
         />
-      )}
+        {balanceModalOpen && (
+          <BallanceModal
+            isOpen={balanceModalOpen}
+            onClose={() => setBalanceModalOpen(false)}
+          
+            amountToAdd={amountToAdd}
+            setAmountToAdd={setAmountToAdd}
+            handleAddBalance={handleAddBalance}
+          />
+        )}
       </div>
 
       <div className="Expenses">
-      <Expenses 
-        onAddExpense={() => setExpenseModalOpen(true)}
-        totalExpenses={totalAmount}
-      />
-       {expenseModalOpen && (
-        <ExpensesModal
-          isOpen={expenseModalOpen}
-          onClose={() => {
-            setExpenseModalOpen(false);
-            
-            }}
-          onRequestClose={() => setExpenseModalOpen(false)}
-          onAddExpense={handleAddExpense}
-       
+        <Expenses 
+          onAddExpense={() => setExpenseModalOpen(true)}
+          totalExpenses={totalAmount}
         />
-      )}
+        {expenseModalOpen && (
+          <ExpensesModal
+            isOpen={expenseModalOpen}
+              onClose={() => {
+              setExpenseModalOpen(false);
+            
+              }}
+            onRequestClose={() => setExpenseModalOpen(false)}
+            onAddExpense={handleAddExpense}
+       
+          />
+        )}
       </div>
       <PieChart expenses={expenses}/>
-      
-    </div>
-    <div>
+      </div>
+      <div className="App-bottom">
         <TransactionList expenses={expenses} />
       </div>
-    </>
+    </div>
+    
+    
   )
 
 

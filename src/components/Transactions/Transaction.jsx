@@ -4,6 +4,7 @@ import { TiDeleteOutline } from "react-icons/ti";
 import { CiEdit } from "react-icons/ci";
 import { GoGift } from "react-icons/go";
 import { PiCar } from "react-icons/pi";
+import { MdCurrencyRupee } from "react-icons/md";
 import styles from './Transaction.module.css'
 
 function Transactions({data}){
@@ -33,8 +34,8 @@ function Transactions({data}){
             </div>
             
             <div className={styles.options}>
-                <p className={styles.price}>{data.price}</p>
-                <div>
+                <p className={styles.price}><MdCurrencyRupee/>{data.price}</p>
+                <div className={styles.options_1}>
                 <TiDeleteOutline className={styles.deleteIcon}/>
                 <CiEdit className={styles.editIcon} />
                 </div>
