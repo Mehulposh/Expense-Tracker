@@ -5,23 +5,7 @@ import styles from './BarGraph.module.css';
 
 const categories = ["Food", "Travel", "Entertainment"];
 
-const RoundedBar = (props) => {
-  const { x, y, width, height, fill } = props;
-  const radius = 10; // Adjust the radius for the curve
-  return (
-    <g>
-      <rect
-        x={x}
-        y={y}
-        width={width}
-        height={height}
-        fill={fill}
-        rx={radius}
-        ry={radius}
-      />
-    </g>
-  );
-};
+
 
 function CustomBarChart({ data}) {
 
@@ -54,7 +38,7 @@ function CustomBarChart({ data}) {
       <YAxis type="category" dataKey='category' className={styles.Yaxis} axisLine={false} tickLine={false}/>
       <Tooltip />
       
-      <Bar dataKey="price" fill="#8784D2" barSize={22} shape={<RoundedBar/>}/>
+      <Bar dataKey="price" fill="#8784D2" barSize={22} radius={[0, 10, 10, 0]}/>
     </BarChart>
   
     </div>

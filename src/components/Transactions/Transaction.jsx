@@ -40,7 +40,7 @@ function Transactions({data , deleteExpense , editExpense}){
                 <div className={styles.deleteIcon} onClick={() => deleteExpense(data.id)} >
                 <TiDeleteOutline />
                 </div>
-                <div className={styles.editIcon} onClick={() => data && editExpense(data)}>
+                <div className={styles.editIcon} onClick={() => editExpense(data)}>
                 <CiEdit  />
                 </div>
             </div>
