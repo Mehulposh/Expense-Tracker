@@ -2,12 +2,6 @@ import React from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 import styles from './BarGraph.module.css';
 
-// const sampleData = [
-//   { category: "Food", price: 120 },
-//   { category: "Travel", price: 200 },
-//   { category: "Shopping", price: 150 },
-//   { category: "Entertainment", price: 100 },
-// ];
 
 const categories = ["Food", "Travel", "Entertainment"];
 
@@ -33,12 +27,12 @@ function CustomBarChart({ data}) {
 
      const chartData = categories.map((category) => {
     const totalPrice = data
-      .filter((item) => item.category === category)
+      .filter((item) => item.category.toLowerCase() === category.toLowerCase())
       .reduce((sum, item) => sum + Number(item.price), 0);
     return { category, price: totalPrice };
   });
 
-  
+  console.log(chartData);
   return (
     <div>
         <h2>Top Expenses</h2>
@@ -56,8 +50,8 @@ function CustomBarChart({ data}) {
         bottom: 5,
       }}
     >
-      
-      <YAxis type="category" dataKey='category' className={styles.Yaxis} axisLine={false}/>
+      <XAxis type="number" hide={true}/>
+      <YAxis type="category" dataKey='category' className={styles.Yaxis} axisLine={false} tickLine={false}/>
       <Tooltip />
       
       <Bar dataKey="price" fill="#8784D2" barSize={22} shape={<RoundedBar/>}/>
