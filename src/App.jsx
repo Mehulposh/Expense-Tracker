@@ -73,12 +73,15 @@ function App() {
     
   }, [expenses]);
 
+
+
   const handleAddBalance = (amount) => {
     const numericAmount = Number(amount);
   
     if (!isNaN(numericAmount)) {
       setWalletBalance((prev) => Number(prev) + numericAmount);
     }
+      setAmountToAdd('');
       setBalanceModalOpen(false);
   };
 
@@ -99,7 +102,17 @@ function App() {
 };
 
 
-  
+ const handleDeleteExpense = (expenseId) => {
+  setExpenses((prevExpenses) => {
+    const updatedExpenses = prevExpenses.filter((expense) => expense.id !== expenseId);
+
+    // Recalculate wallet balance after removing the expense
+    const totalExpenses = updatedExpenses.reduce((total, expense) => total + Number(expense.price), 0);
+    setWalletBalance(walletBalance - totalExpenses);
+
+    return updatedExpenses;
+  });
+};
 
   
 
@@ -147,7 +160,7 @@ function App() {
       <PieChart expenses={expenses}/>
       </div>
       <div className="App-bottom">
-        <TransactionList expenses={expenses} />
+        <TransactionList expenses={expenses} handleDelete={handleDeleteExpense} />
         <BarGraph data={expenses}/>
       </div>
     </div>

@@ -7,7 +7,7 @@ import { PiCar } from "react-icons/pi";
 import { MdCurrencyRupee } from "react-icons/md";
 import styles from './Transaction.module.css'
 
-function Transactions({data}){
+function Transactions({data , deleteExpense}){
 
      const category = data.category.toLowerCase(); 
 
@@ -37,9 +37,11 @@ function Transactions({data}){
                 <div>
                     <p className={styles.price}><MdCurrencyRupee/>{data.price}</p>
                 </div>
-                <div className={styles.options_1}>
-                <TiDeleteOutline className={styles.deleteIcon}/>
-                <CiEdit className={styles.editIcon} />
+                <div className={styles.deleteIcon} onClick={() => deleteExpense(data.id)} >
+                <TiDeleteOutline />
+                </div>
+                <div className={styles.editIcon}>
+                <CiEdit  />
                 </div>
             </div>
         </div>

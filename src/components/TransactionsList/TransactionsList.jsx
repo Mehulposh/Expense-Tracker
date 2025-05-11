@@ -3,7 +3,7 @@ import Transaction from '../Transactions/Transaction';
 import styles from './TransactionList.module.css';
 
 
-function TransactionList({expenses}){
+function TransactionList({expenses , handleDelete}){
     return (
         <div>
         <h2>Recent Transactions</h2>
@@ -11,7 +11,7 @@ function TransactionList({expenses}){
 
             {expenses.length>0? (expenses.map((transaction) => (
                     <>
-                    <Transaction key={transaction.id} data={transaction} />
+                    <Transaction key={transaction.id} data={transaction} deleteExpense={handleDelete} />
                     <hr/>
                     </>
                 ))) : (<p>No transactions!</p>)}

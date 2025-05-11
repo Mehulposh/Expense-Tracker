@@ -23,7 +23,7 @@ function BallanceModal({isOpen,onClose,amountToAdd,setAmountToAdd, handleAddBala
                 }} 
                 className={styles.input}
             />
-            <button type="submit" onClick={handleAddBalance} className={styles.addBalance}>Add Balance</button>
+            <button type="submit" onClick={() => handleAddBalance(amountToAdd)} className={styles.addBalance}>Add Balance</button>
             <button type="button" onClick={onClose} className={styles.Close}>Close</button>
             </div>
         </Modal>
