@@ -7,7 +7,9 @@ function WalletBalance({ balance,openModal }) {
     : "$0.00";
 
    return ( <div>
+      <div>
       <h2>Wallet Balance: <span className={styles.balance}>{formattedBalance}</span></h2>
+      </div>
       <button
         type="button"
         onClick={openModal}
