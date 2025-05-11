@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from "react";
 import Modal from "react-modal";
 import styles from './ExpensesModal.module.css';
+import { v4 as uuidv4 } from 'uuid';
 
 
 const categories = ["Food", "Travel", "Entertainment"];
@@ -53,11 +54,9 @@ function ExpensesModal({ isOpen, onClose, onAddExpense, expenseToEdit  }) {
         
         // Create expense object with proper data types
         const expense = {
-          
-          title: formData.title,
-          price: Number(formData.price), // Convert to number
-          date: formData.date,
-          category: formData.category
+          ...formData,
+          price: Number(formData.price),
+          id: expenseToEdit ? expenseToEdit.id : uuidv4(),
         };
         
         // Add or update expense
@@ -71,11 +70,11 @@ function ExpensesModal({ isOpen, onClose, onAddExpense, expenseToEdit  }) {
         <Modal 
             isOpen={isOpen}
             onRequestClose={onClose}
-            contentLabel="Add Expenses"
+            contentLabel={expenseToEdit ? "Edit Expense" : "Add Expense"}
             className={styles.expensesModal}
         >
         <form onSubmit={handleSubmit}>
-            <h2 className={styles.heading}>Add Expenses</h2>
+            <h2 className={styles.heading}>{expenseToEdit ? "Edit Expense" : "Add Expense"}</h2>
             <input type="text" name="title" placeholder="Title" value={formData.title}  onChange={handleChange}
                 required className={styles.titleInput}
             />

@@ -26,6 +26,9 @@ function App() {
  
   const [expenses, setExpenses] = useState([]);
   const [amountToAdd, setAmountToAdd] = useState('');
+
+  const [expenseToEdit, setExpenseToEdit] = useState(null);
+
   
   useEffect(() => {
     localStorage.setItem("walletBalance", walletBalance);
@@ -101,6 +104,26 @@ function App() {
     
 };
 
+  const handleEditExpense = (updatedExpense) => {
+    setExpenses((prevExpenses) =>
+      prevExpenses.map((expense) =>
+        expense.id === updatedExpense.id ? updatedExpense : expense
+      )
+    );
+    setExpenseToEdit(null); // Clear the edit state
+    setExpenseModalOpen(false); // Close the modal after editing
+  };
+
+  const handleEditClick = (expense) => {
+    setExpenseToEdit(expense); // Set the expense to edit
+    setExpenseModalOpen(true); // Open the modal
+  };
+
+  const handleCloseModal = () => {
+    setExpenseToEdit(null); // Reset the edit state
+    setExpenseModalOpen(false); // Close the modal
+  };
+
 
  const handleDeleteExpense = (expenseId) => {
   setExpenses((prevExpenses) => {
@@ -147,12 +170,9 @@ function App() {
         {expenseModalOpen && (
           <ExpensesModal
             isOpen={expenseModalOpen}
-              onClose={() => {
-              setExpenseModalOpen(false);
-            
-              }}
-            onRequestClose={() => setExpenseModalOpen(false)}
-            onAddExpense={handleAddExpense}
+            onClose={handleCloseModal}
+            onAddExpense={expenseToEdit ? handleEditExpense : handleAddExpense}
+            expenseToEdit={expenseToEdit}
        
           />
         )}
@@ -160,7 +180,7 @@ function App() {
       <PieChart expenses={expenses}/>
       </div>
       <div className="App-bottom">
-        <TransactionList expenses={expenses} handleDelete={handleDeleteExpense} />
+        <TransactionList expenses={expenses} handleDelete={handleDeleteExpense} handleEditClick={handleEditClick} />
         <BarGraph data={expenses}/>
       </div>
     </div>
