@@ -1,13 +1,12 @@
 import React from "react";
+import { MdCurrencyRupee } from "react-icons/md";
 import styles from "./Expenses.module.css";
 
 function Expenses({ onAddExpense, totalExpenses }) {
 
-  const formattedWxpense = typeof totalExpenses === 'number' 
-    ? totalExpenses.toLocaleString('en-US', { style: 'currency', currency: 'INR' })
-    : "0.00";
+  const formattedWxpense = typeof typeof totalExpenses === 'number' ? totalExpenses : 0;
    return ( <div>
-      <h2>Expenses: <span className={styles.total_expenses}>{formattedWxpense}</span></h2>
+      <h2>Expenses: <span className={styles.total_expenses}><MdCurrencyRupee/>{formattedWxpense}</span></h2>
       <button
         type="button"
         onClick={onAddExpense}

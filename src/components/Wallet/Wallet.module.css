@@ -1,7 +1,15 @@
 .balance{
+    display: flex;
+    align-items: center;
+    
     color: greenyellow;
 }
 
+h2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .addButton{
     background: linear-gradient(to right ,greenyellow, lightgreen);
     color: white;
