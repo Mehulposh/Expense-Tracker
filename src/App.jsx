@@ -8,10 +8,14 @@ import PieChart  from "./components/PieChart/PieChart";
 import BarGraph from "./components/BarGraph/BarGraph"
 import TransactionList from "./components/TransactionsList/TransactionsList";
 import { v4 as uuidv4 } from 'uuid';
+import { useSnackbar } from 'notistack';
+
 
 import './App.css';
 
 function App() {
+  const { enqueueSnackbar } = useSnackbar();
+
   const [walletBalance, setWalletBalance] = useState(() => {
     const storedBalance = localStorage.getItem("walletBalance");
     const savedExpenses = localStorage.getItem('expenses');
@@ -65,7 +69,7 @@ function App() {
     }
   }, []);
 
-  console.log(expenses);
+
 
   const totalAmount = Array.isArray(expenses) 
     ? expenses.reduce((total, expense) => total + Number(expense.price), 0) 
@@ -93,7 +97,7 @@ function App() {
     const numericPrice = Number(expense.price);
 
     if (walletBalance < numericPrice) {
-      alert("Insufficient balance!");
+      enqueueSnackbar("Insufficient balance!",{variant: "warning"});
       return;
     }
 

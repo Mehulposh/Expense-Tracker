@@ -16,7 +16,7 @@ function CustomBarChart({ data}) {
     return { category, price: totalPrice };
   });
 
-  console.log(chartData);
+
   return (
     <div>
         <h2>Top Expenses</h2>

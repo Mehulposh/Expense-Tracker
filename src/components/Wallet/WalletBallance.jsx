@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./Wallet.module.css";
 import { MdCurrencyRupee } from "react-icons/md";
+
+
 function WalletBalance({ balance,openModal }) {
 
   const formattedBalance = typeof balance === 'number' ? balance : 0;
