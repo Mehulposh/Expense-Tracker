@@ -20,7 +20,7 @@ function ExpensesModal({ isOpen, onClose, onAddExpense, expenseToEdit  }) {
         if (expenseToEdit) {
           setFormData({
             title: expenseToEdit.title || '',
-            amount: expenseToEdit.amount || '',
+            price: expenseToEdit.price || '',
             date: expenseToEdit.date || '',
             category: expenseToEdit.category || 'other'
           });
@@ -28,7 +28,7 @@ function ExpensesModal({ isOpen, onClose, onAddExpense, expenseToEdit  }) {
           // Reset form for new expenses
           setFormData({
             title: '',
-            amount: '',
+            price: '',
             date: '',
             category: 'other'
           });
@@ -104,7 +104,7 @@ function ExpensesModal({ isOpen, onClose, onAddExpense, expenseToEdit  }) {
                 className={styles.dateInput}
                 required 
                 />
-            <button type="submit" className={styles.addExpenses}>Add Expenses</button>
+            <button type="submit" className={styles.addExpenses}>Add Expense</button>
             <button type="button" onClick={onClose} className={styles.ExpensesClose}>Close</button>
         </form>
         </Modal>

@@ -52,6 +52,8 @@
     height: 40px;
     margin: 5px;
     border-radius: 15px;
+    font-size: 16px;
+    font-weight: 400;
     border: none;
     box-shadow: 0px 4px 4px 0px #00000040;
     cursor: pointer;
