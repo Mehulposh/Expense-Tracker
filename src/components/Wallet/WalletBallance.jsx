@@ -3,7 +3,7 @@ import styles from "./Wallet.module.css";
 function WalletBalance({ balance,openModal }) {
 
   const formattedBalance = typeof balance === 'number' 
-    ? balance.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
+    ? balance.toLocaleString('en-US', { style: 'currency', currency: 'INR' })
     : "$0.00";
 
    return ( <div>
